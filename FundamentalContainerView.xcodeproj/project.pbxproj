@@ -23,6 +23,10 @@
 		DE2A557A1D847395008225C8 /* TableHeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2A55791D847395008225C8 /* TableHeaderViewController.swift */; };
 		DE2A557E1D847536008225C8 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2A557C1D847536008225C8 /* ListTableViewCell.swift */; };
 		DE2A557F1D847536008225C8 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE2A557D1D847536008225C8 /* ListTableViewCell.xib */; };
+		DE49993C1D85102600911DBF /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49993B1D85102600911DBF /* DeviceSize.swift */; };
+		DE49993E1D85113400911DBF /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49993D1D85113400911DBF /* ColorConverter.swift */; };
+		DE4999411D851BF100911DBF /* RightMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE49993F1D851BF100911DBF /* RightMenuTableViewCell.swift */; };
+		DE4999421D851BF100911DBF /* RightMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE4999401D851BF100911DBF /* RightMenuTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +69,10 @@
 		DE2A55791D847395008225C8 /* TableHeaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableHeaderViewController.swift; sourceTree = "<group>"; };
 		DE2A557C1D847536008225C8 /* ListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		DE2A557D1D847536008225C8 /* ListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
+		DE49993B1D85102600911DBF /* DeviceSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
+		DE49993D1D85113400911DBF /* ColorConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConverter.swift; sourceTree = "<group>"; };
+		DE49993F1D851BF100911DBF /* RightMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightMenuTableViewCell.swift; sourceTree = "<group>"; };
+		DE4999401D851BF100911DBF /* RightMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RightMenuTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +123,7 @@
 		DE2A55371D83BEA1008225C8 /* FundamentalContainerView */ = {
 			isa = PBXGroup;
 			children = (
+				DE49993A1D850EE800911DBF /* Library */,
 				DE2A556A1D84572E008225C8 /* MainContentsController */,
 				DE2A55671D8456F0008225C8 /* SideMenuController */,
 				DE2A55661D845565008225C8 /* BaseViewController */,
@@ -173,6 +182,7 @@
 		DE2A55691D845715008225C8 /* RightMenu */ = {
 			isa = PBXGroup;
 			children = (
+				DE4999431D851BF600911DBF /* RightMenuTableViewCell */,
 				DE2A556D1D845893008225C8 /* RightMenuViewController.swift */,
 				DE2A556F1D8458BE008225C8 /* RightBannerViewController.swift */,
 			);
@@ -214,6 +224,24 @@
 				DE2A557D1D847536008225C8 /* ListTableViewCell.xib */,
 			);
 			name = ListTableViewCell;
+			sourceTree = "<group>";
+		};
+		DE49993A1D850EE800911DBF /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				DE49993B1D85102600911DBF /* DeviceSize.swift */,
+				DE49993D1D85113400911DBF /* ColorConverter.swift */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		DE4999431D851BF600911DBF /* RightMenuTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DE49993F1D851BF100911DBF /* RightMenuTableViewCell.swift */,
+				DE4999401D851BF100911DBF /* RightMenuTableViewCell.xib */,
+			);
+			name = RightMenuTableViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +350,7 @@
 			files = (
 				DE2A55431D83BEA2008225C8 /* LaunchScreen.storyboard in Resources */,
 				DE2A557F1D847536008225C8 /* ListTableViewCell.xib in Resources */,
+				DE4999421D851BF100911DBF /* RightMenuTableViewCell.xib in Resources */,
 				DE2A55401D83BEA2008225C8 /* Assets.xcassets in Resources */,
 				DE2A553E1D83BEA1008225C8 /* Main.storyboard in Resources */,
 			);
@@ -350,13 +379,16 @@
 			files = (
 				DE2A553B1D83BEA1008225C8 /* ViewController.swift in Sources */,
 				DE2A557A1D847395008225C8 /* TableHeaderViewController.swift in Sources */,
+				DE49993C1D85102600911DBF /* DeviceSize.swift in Sources */,
 				DE2A55741D84599D008225C8 /* ContentDetailViewController.swift in Sources */,
+				DE4999411D851BF100911DBF /* RightMenuTableViewCell.swift in Sources */,
 				DE2A55391D83BEA1008225C8 /* AppDelegate.swift in Sources */,
 				DE2A55721D845973008225C8 /* ContentListViewController.swift in Sources */,
 				DE2A556E1D845894008225C8 /* RightMenuViewController.swift in Sources */,
 				DE2A55701D8458BE008225C8 /* RightBannerViewController.swift in Sources */,
 				DE2A556C1D84584E008225C8 /* LeftMenuViewController.swift in Sources */,
 				DE2A55781D847361008225C8 /* BottomSlideViewController.swift in Sources */,
+				DE49993E1D85113400911DBF /* ColorConverter.swift in Sources */,
 				DE2A557E1D847536008225C8 /* ListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -582,6 +614,7 @@
 				DE2A555F1D83BEA2008225C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE2A55601D83BEA2008225C8 /* Build configuration list for PBXNativeTarget "FundamentalContainerViewTests" */ = {
 			isa = XCConfigurationList;
@@ -590,6 +623,7 @@
 				DE2A55621D83BEA2008225C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DE2A55631D83BEA2008225C8 /* Build configuration list for PBXNativeTarget "FundamentalContainerViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -598,6 +632,7 @@
 				DE2A55651D83BEA2008225C8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

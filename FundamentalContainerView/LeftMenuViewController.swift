@@ -8,28 +8,96 @@
 
 import UIKit
 
+//定数設定などその他
+struct LeftButtonSetting {
+    
+    //ScrollViewに表示するボタン名称に関する設定
+    static let buttonSettingList: [String] = [
+        "🍅1番目", "🍊2番目", "🍔3番目", "🍟4番目",
+        "🍛5番目", "🍜6番目", "🍰7番目", "☕️8番目"
+    ]
+    
+    //ボタンの背景色に関する設定
+    static let colorSettingList: [String] = [
+        "f8c6c7", "f2cb24", "87c9a3", "b9e4f7",
+        "face83", "d2cce6", "ccdc47", "81b7ea"
+    ]
+}
+
 class LeftMenuViewController: UIViewController {
+
+    //ボタン群を格納するためのスクロールビュー
+    @IBOutlet weak var leftMenuButtonScrollSet: UIScrollView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        leftMenuButtonScrollSet.delegate = self
+    }
 
-        // Do any additional setup after loading the view.
+    //レイアウト処理が完了した際の処理
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        //スクロールビューの定義
+        self.initMenuScrollViewDefinition()
+
+        //スクロールビューの中身のサイズを設定する
+        leftMenuButtonScrollSet.backgroundColor = UIColor.lightGrayColor()
+        leftMenuButtonScrollSet.contentSize = CGSizeMake(
+            leftMenuButtonScrollSet.frame.size.width,
+            CGFloat(100 * LeftButtonSetting.buttonSettingList.count)
+        )
+
+        //スクロールビューの中にボタンを縦一列に並べて配置する
+        for i in 0...(LeftButtonSetting.buttonSettingList.count - 1) {
+            
+            //メニュー用のスクロールビューにボタンを配置
+            let buttonElement: UIButton! = UIButton()
+            self.leftMenuButtonScrollSet.addSubview(buttonElement)
+            
+            buttonElement.frame = CGRectMake(
+                CGFloat(0),
+                CGFloat(100 * i),
+                CGFloat(100),
+                CGFloat(100)
+            )
+            buttonElement.backgroundColor = ColorConverter.colorWithHexString(LeftButtonSetting.colorSettingList[i])
+            buttonElement.setTitle(LeftButtonSetting.buttonSettingList[i], forState: .Normal)
+            buttonElement.titleLabel!.font = UIFont(name: "Bold", size: CGFloat(16))
+            buttonElement.tag = i
+            buttonElement.addTarget(self, action: #selector(LeftMenuViewController.scrollViewButtonTapped(_:)), forControlEvents: .TouchUpInside)
+            
+        }
+
+    }
+
+    //Menu用のUIScrollViewの初期化を行う
+    private func initMenuScrollViewDefinition() {
+        
+        leftMenuButtonScrollSet.pagingEnabled = false
+        leftMenuButtonScrollSet.scrollEnabled = true
+        leftMenuButtonScrollSet.directionalLockEnabled = false
+        leftMenuButtonScrollSet.showsHorizontalScrollIndicator = false
+        leftMenuButtonScrollSet.showsVerticalScrollIndicator = false
+        leftMenuButtonScrollSet.bounces = false
+        leftMenuButtonScrollSet.scrollsToTop = false
+    }
+    
+    //スクロールビューに配置されたボタンをタップした際に行われる処理
+    func scrollViewButtonTapped(button: UIButton){
+        
+        //押されたボタンのタグを取得
+        let buttonNumber: Int = button.tag
+        print("\(buttonNumber)番目のボタンが押されました")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
+
+}
+
+extension LeftMenuViewController: UIScrollViewDelegate {
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -1,5 +1,5 @@
 //
-//  ListTableViewCell.swift
+//  RightMenuTableViewCell.swift
 //  FundamentalContainerView
 //
 //  Created by 酒井文也 on 2016/09/11.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ListTableViewCell: UITableViewCell {
+class RightMenuTableViewCell: UITableViewCell {
 
-    //一覧セル内に配置するUI部品
-    @IBOutlet weak var listImageView: UIImageView!
-    @IBOutlet weak var listTitleLabel: UILabel!
-
+    //UITableViewCellの部品
+    @IBOutlet weak var rightMenuImageView: UIImageView!
+    @IBOutlet weak var rightMenuTitleLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
