@@ -15,35 +15,35 @@ enum BottomStatus {
 }
 
 class BottomSlideViewController: UIViewController {
-
+    
     //開閉ステータス管理用のメンバ変数
     var bottomStatus: BottomStatus = BottomStatus.Opened
-
+    
     @IBOutlet weak var statusButton: UIButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    @IBAction func popupHandleAction(sender: AnyObject) {
-
+    
+    @IBAction func popupHandleAction(_ sender: AnyObject) {
+        
         //親のViewControllerのメソッドを実行する
-        let vc = self.parentViewController as! ContentDetailViewController
+        let vc = self.parent as! ContentDetailViewController
         
         if bottomStatus == BottomStatus.Opened {
             vc.closeBottomPopup()
             bottomStatus = BottomStatus.Closed
-            statusButton.setTitle("× OPEN", forState: .Normal)
+            statusButton.setTitle("× OPEN", for: .normal)
         } else {
             vc.openBottomPopup()
             bottomStatus = BottomStatus.Opened
-            statusButton.setTitle("× CLOSE", forState: .Normal)
+            statusButton.setTitle("× CLOSE", for: .normal)
         }
-
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }

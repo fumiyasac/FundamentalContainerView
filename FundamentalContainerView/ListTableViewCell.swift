@@ -9,16 +9,16 @@
 import UIKit
 
 class ListTableViewCell: UITableViewCell {
-
+    
     //一覧セル内に配置するUI部品
     @IBOutlet weak var listImageView: UIImageView!
     @IBOutlet weak var listTitleLabel: UILabel!
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
-    override func setSelected(selected: Bool, animated: Bool) {
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     

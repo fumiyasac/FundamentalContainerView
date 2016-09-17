@@ -25,30 +25,30 @@ struct LeftButtonSetting {
 }
 
 class LeftMenuViewController: UIViewController {
-
+    
     //ボタン群を格納するためのスクロールビュー
     @IBOutlet weak var leftMenuButtonScrollSet: UIScrollView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         leftMenuButtonScrollSet.delegate = self
     }
-
+    
     //レイアウト処理が完了した際の処理
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         //スクロールビューの定義
         self.initMenuScrollViewDefinition()
-
+        
         //スクロールビューの中身のサイズを設定する
-        leftMenuButtonScrollSet.backgroundColor = UIColor.lightGrayColor()
-        leftMenuButtonScrollSet.contentSize = CGSizeMake(
-            leftMenuButtonScrollSet.frame.size.width,
-            CGFloat(100 * LeftButtonSetting.buttonSettingList.count)
+        leftMenuButtonScrollSet.backgroundColor = UIColor.lightGray
+        leftMenuButtonScrollSet.contentSize = CGSize(
+            width: CGFloat(leftMenuButtonScrollSet.frame.size.width),
+            height: CGFloat(100 * LeftButtonSetting.buttonSettingList.count)
         )
-
+        
         //スクロールビューの中にボタンを縦一列に並べて配置する
         for i in 0...(LeftButtonSetting.buttonSettingList.count - 1) {
             
@@ -56,28 +56,25 @@ class LeftMenuViewController: UIViewController {
             let buttonElement: UIButton! = UIButton()
             self.leftMenuButtonScrollSet.addSubview(buttonElement)
             
-            buttonElement.frame = CGRectMake(
-                CGFloat(0),
-                CGFloat(100 * i),
-                CGFloat(100),
-                CGFloat(100)
+            buttonElement.frame = CGRect(
+                x: 0, y: (100 * i), width: 100, height: 100
             )
-            buttonElement.backgroundColor = ColorConverter.colorWithHexString(LeftButtonSetting.colorSettingList[i])
-            buttonElement.setTitle(LeftButtonSetting.buttonSettingList[i], forState: .Normal)
+            buttonElement.backgroundColor = ColorConverter.colorWithHexString(hex: LeftButtonSetting.colorSettingList[i])
+            buttonElement.setTitle(LeftButtonSetting.buttonSettingList[i], for: .normal)
             buttonElement.titleLabel!.font = UIFont(name: "Bold", size: CGFloat(16))
             buttonElement.tag = i
-            buttonElement.addTarget(self, action: #selector(LeftMenuViewController.scrollViewButtonTapped(_:)), forControlEvents: .TouchUpInside)
+            buttonElement.addTarget(self, action: #selector(LeftMenuViewController.scrollViewButtonTapped(button:)), for: .touchUpInside)
             
         }
-
+        
     }
-
+    
     //Menu用のUIScrollViewの初期化を行う
     private func initMenuScrollViewDefinition() {
         
-        leftMenuButtonScrollSet.pagingEnabled = false
-        leftMenuButtonScrollSet.scrollEnabled = true
-        leftMenuButtonScrollSet.directionalLockEnabled = false
+        leftMenuButtonScrollSet.isPagingEnabled = false
+        leftMenuButtonScrollSet.isScrollEnabled = true
+        leftMenuButtonScrollSet.isDirectionalLockEnabled = false
         leftMenuButtonScrollSet.showsHorizontalScrollIndicator = false
         leftMenuButtonScrollSet.showsVerticalScrollIndicator = false
         leftMenuButtonScrollSet.bounces = false
@@ -91,13 +88,12 @@ class LeftMenuViewController: UIViewController {
         let buttonNumber: Int = button.tag
         print("\(buttonNumber)番目のボタンが押されました")
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }
 
 extension LeftMenuViewController: UIScrollViewDelegate {
-    
 }

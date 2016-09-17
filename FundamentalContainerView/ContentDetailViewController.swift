@@ -9,10 +9,10 @@
 import UIKit
 
 class ContentDetailViewController: UIViewController, UINavigationControllerDelegate {
-
+    
     //動かす対象のコンテナビュー
     @IBOutlet weak var popSlideView: UIView!
-
+    
     //ポップアップもどきの上Constaint
     @IBOutlet weak var topPopupConstraint: NSLayoutConstraint!
     
@@ -24,21 +24,21 @@ class ContentDetailViewController: UIViewController, UINavigationControllerDeleg
         
         //UINavigationControllerのデリゲート
         self.navigationController?.delegate = self
-
+        
         //タイトル用の色および書式の設定
         let attrsMainTitle = [
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSForegroundColorAttributeName : UIColor.white,
             NSFontAttributeName : UIFont(name: "Georgia-Bold", size: 15)!
         ]
         self.navigationItem.title = "Detail Page"
-        self.navigationController?.navigationBar.titleTextAttributes = attrsMainTitle        
+        self.navigationController?.navigationBar.titleTextAttributes = attrsMainTitle
     }
     
     //ボトムのポップアップを開く
     func openBottomPopup() {
         topPopupConstraint.constant = 17
         bottomPopupConstraint.constant = 0
-        UIView.animateWithDuration(0.26, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations:
+        UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:
             
             //変更したAutoLayoutのConstant値を適用する
             {
@@ -47,13 +47,13 @@ class ContentDetailViewController: UIViewController, UINavigationControllerDeleg
             }
         )
     }
-
+    
     //ボトムのポップアップを閉じる
     func closeBottomPopup() {
         topPopupConstraint.constant = 137
         bottomPopupConstraint.constant = -120
-        UIView.animateWithDuration(0.26, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations:
-
+        UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:
+            
             //変更したAutoLayoutのConstant値を適用する
             {
                 self.view.layoutIfNeeded()
@@ -65,5 +65,5 @@ class ContentDetailViewController: UIViewController, UINavigationControllerDeleg
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }

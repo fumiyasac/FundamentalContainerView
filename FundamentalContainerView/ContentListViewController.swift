@@ -9,14 +9,14 @@
 import UIKit
 
 class ContentListViewController: UIViewController, UINavigationControllerDelegate {
-
+    
     //ナビゲーションのアイテム
     var leftMenuButton: UIBarButtonItem!
     var rightMenuButton: UIBarButtonItem!
-
+    
     //コンテンツ表示用のテーブルビュー
     @IBOutlet weak var listTableView: UITableView!
-
+    
     /**
      * ヘッダーに入れるコンテナビュー
      * (ポイント)このコンテナに関してはAutoLayoutで制約を張らずにこのViewControllerに置いているだけ
@@ -25,23 +25,18 @@ class ContentListViewController: UIViewController, UINavigationControllerDelegat
      */
     @IBOutlet weak var listTableHeader: UIView!
     
-    //配置するテーブルビューに関するセッティング
-    private let sectionCount = 1
-    private let cellCount = 10
-    private let cellHeight = 120
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         //UINavigationControllerのデリゲート
         self.navigationController?.delegate = self
-
+        
         //ナビゲーションと色設定
-        self.navigationController?.navigationBar.barTintColor = UIColor.darkGrayColor()
+        self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
         
         //タイトル用の色および書式の設定
         let attrsMainTitle = [
-            NSForegroundColorAttributeName : UIColor.whiteColor(),
+            NSForegroundColorAttributeName : UIColor.white,
             NSFontAttributeName : UIFont(name: "Georgia-Bold", size: 15)!
         ]
         self.navigationItem.title = "Welcome to This Sample!"
@@ -51,15 +46,15 @@ class ContentListViewController: UIViewController, UINavigationControllerDelegat
         let attrsBarButton = [
             NSFontAttributeName : UIFont(name: "Georgia-Bold", size: 16)!
         ]
-
+        
         //左メニューボタンの配置
-        leftMenuButton = UIBarButtonItem(title: "🔖", style: .Plain, target: self, action: #selector(ContentListViewController.leftMenuButtonTapped(_:)))
-        leftMenuButton.setTitleTextAttributes(attrsBarButton, forState: .Normal)
+        leftMenuButton = UIBarButtonItem(title: "🔖", style: .plain, target: self, action: #selector(ContentListViewController.leftMenuButtonTapped(sender:)))
+        leftMenuButton.setTitleTextAttributes(attrsBarButton, for: .normal)
         self.navigationItem.leftBarButtonItem = leftMenuButton
-
+        
         //右メニューボタンの配置
-        rightMenuButton = UIBarButtonItem(title: "≡", style: .Plain, target: self, action: #selector(ContentListViewController.rightMenuButtonTapped(_:)))
-        rightMenuButton.setTitleTextAttributes(attrsBarButton, forState: .Normal)
+        rightMenuButton = UIBarButtonItem(title: "≡", style: .plain, target: self, action: #selector(ContentListViewController.rightMenuButtonTapped(sender:)))
+        rightMenuButton.setTitleTextAttributes(attrsBarButton, for: .normal)
         self.navigationItem.rightBarButtonItem = rightMenuButton
         
         
@@ -69,26 +64,23 @@ class ContentListViewController: UIViewController, UINavigationControllerDelegat
         
         //Xibのクラスを読み込む宣言を行う
         let nibDefault: UINib = UINib(nibName: "ListTableViewCell", bundle: nil)
-        listTableView.registerNib(nibDefault, forCellReuseIdentifier: "ListTableViewCell")
+        listTableView.register(nibDefault, forCellReuseIdentifier: "ListTableViewCell")
     }
-
+    
     //レイアウト処理が完了した際の処理
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         //テーブルビューのヘッダーに使用するコンテナの再配置
-        listTableHeader.frame = CGRectMake(
-            CGFloat(0),
-            CGFloat(0),
-            CGFloat(DeviceSize.screenWidth()),
-            CGFloat(180)
+        listTableHeader.frame = CGRect(
+            x: 0, y: 0, width: DeviceSize.screenWidth(), height: 180
         )
-
+        
     }
-
+    
     //左メニューボタンを押した際のアクション
     func leftMenuButtonTapped(sender: UIBarButtonItem) {
-
+        
         /**
          * 親コントローラーのメソッドを呼び出して左コンテンツを開く
          * このコントローラーはUINavigationControllerDelegateを使っているので、
@@ -96,13 +88,13 @@ class ContentListViewController: UIViewController, UINavigationControllerDelegat
          * という図式になります。
          *
          */
-        let viewController = self.parentViewController?.parentViewController as! ViewController
-        viewController.handleMainContentsContainerState(MainContentsStatus.LeftMenuOpened)
+        let viewController = self.parent?.parent as! ViewController
+        viewController.handleMainContentsContainerState(status: MainContentsStatus.LeftMenuOpened)
     }
-
+    
     //右メニューボタンを押した際のアクション
     func rightMenuButtonTapped(sender: UIBarButtonItem) {
-
+        
         /**
          * 親コントローラーのメソッドを呼び出して右コンテンツを開く
          * このコントローラーはUINavigationControllerDelegateを使っているので、
@@ -110,73 +102,70 @@ class ContentListViewController: UIViewController, UINavigationControllerDelegat
          * という図式になります。
          *
          */
-        let viewController = self.parentViewController?.parentViewController as! ViewController
-        viewController.handleMainContentsContainerState(MainContentsStatus.RightMenuOpened)
+        let viewController = self.parent?.parent as! ViewController
+        viewController.handleMainContentsContainerState(status: MainContentsStatus.RightMenuOpened)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }
 
 extension ContentListViewController: UITableViewDelegate {
     
     //テーブルのセル高さ ※任意
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CGFloat(cellHeight)
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
     }
-
+    
     //テーブルヘッダに関する処理 ※任意
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         //ヘッダーが必要な物はここにaddSubView → Header用のContainerを突っ込む
         let headerViewBase = UIView()
-        headerViewBase.frame = CGRectMake(
-            CGFloat(0),
-            CGFloat(0),
-            CGFloat(DeviceSize.screenWidth()),
-            CGFloat(180)
+        headerViewBase.frame = CGRect(
+            x: 0, y: 0, width: DeviceSize.screenWidth(), height: 180
         )
-        headerViewBase.backgroundColor = UIColor.redColor()
+        headerViewBase.backgroundColor = UIColor.red
         headerViewBase.addSubview(listTableHeader)
-        headerViewBase.multipleTouchEnabled = true
-        listTableHeader.multipleTouchEnabled = true
+        headerViewBase.isMultipleTouchEnabled = true
+        listTableHeader.isMultipleTouchEnabled = true
         return headerViewBase
     }
-
+    
     //セクションヘッダー高さ ※任意
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(180)
     }
-
+    
 }
 
 extension ContentListViewController: UITableViewDataSource {
     
     //テーブルの要素数を設定する ※必須
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sectionCount
+    private func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
     }
     
     //テーブルの行数を設定する ※必須
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellCount
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
     }
     
     //表示するセルの中身を設定する ※必須
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ListTableViewCell") as? ListTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ListTableViewCell") as? ListTableViewCell
         
         cell!.listTitleLabel.text = "タイトルが入ります"
-        cell!.accessoryType = UITableViewCellAccessoryType.None
-        cell!.selectionStyle = UITableViewCellSelectionStyle.None
+        cell!.accessoryType = UITableViewCellAccessoryType.none
+        cell!.selectionStyle = UITableViewCellSelectionStyle.none
         return cell!
     }
     
     //セルをタップした時に呼び出される
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("goContentDetail", sender: nil)
+    @objc(tableView:didSelectRowAtIndexPath:) func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goContentDetail", sender: nil)
     }
     
 }

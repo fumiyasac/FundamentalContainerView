@@ -9,25 +9,25 @@
 import UIKit
 
 class TableHeaderViewController: UIViewController {
-
+    
     //テーブルビューヘッダー用スクロールビュー
     @IBOutlet weak var tableViewHeaderScrollView: UIScrollView!
     @IBOutlet weak var tableViewHeaderPageControl: UIPageControl!
- 
+    
     //バナーローテーション用の(ページ数・ページカウンター・タイマー変数）
     let bannerPageNumber = 2
     var bannerPageCounter = 0
-    var timer: NSTimer!
+    var timer: Timer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableViewHeaderScrollView.delegate = self
         
         //バナー画像のローテーション処理
-        timer = NSTimer.scheduledTimerWithTimeInterval(18.0, target: self, selector: #selector(TableHeaderViewController.bannerViewAnimate), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 18.0, target: self, selector: #selector(TableHeaderViewController.bannerViewAnimate), userInfo: nil, repeats: true)
     }
-
+    
     //レイアウト処理が完了した際の処理
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -35,21 +35,17 @@ class TableHeaderViewController: UIViewController {
         initTableViewHeaderScrollView()
         
         //それぞれの位置を決めうちする
-        tableViewHeaderScrollView.frame = CGRectMake(
-            CGFloat(0),
-            CGFloat(0),
-            CGFloat(Int(DeviceSize.screenWidth())),
-            CGFloat(180)
+        tableViewHeaderScrollView.frame = CGRect(
+            x: 0, y :0, width: Int(DeviceSize.screenWidth()), height: 180
         )
-        tableViewHeaderPageControl.center = CGPointMake(
-            CGFloat(Int(DeviceSize.screenWidth() / 2)),
-            CGFloat(150)
+        
+        tableViewHeaderPageControl.center = CGPoint(
+            x: Int(DeviceSize.screenWidth() / 2), y: 150
         )
         
         //スクロールビュー内のサイズを決定する
-        tableViewHeaderScrollView.contentSize = CGSizeMake(
-            CGFloat(Int(DeviceSize.screenWidth()) * 3),
-            CGFloat(180)
+        tableViewHeaderScrollView.contentSize = CGSize(
+            width: Int(DeviceSize.screenWidth()) * 3, height: 180
         )
         
         //スクロールビューの中に画像を一列に並べて配置する
@@ -67,13 +63,13 @@ class TableHeaderViewController: UIViewController {
             
             //画像の設定変更
             if i == 0 {
-                targetImageView.backgroundColor = UIColor.yellowColor()
+                targetImageView.backgroundColor = UIColor.yellow
             } else if i == 1 {
-                targetImageView.backgroundColor = UIColor.greenColor()
+                targetImageView.backgroundColor = UIColor.green
             } else if (i == 2) {
-                targetImageView.backgroundColor = UIColor.blueColor()
+                targetImageView.backgroundColor = UIColor.blue
             }
-
+            
         }
         
     }
@@ -83,17 +79,17 @@ class TableHeaderViewController: UIViewController {
         
         bannerPageCounter = (bannerPageCounter + 1) % (bannerPageNumber + 1)
         
-        UIView.animateWithDuration(0.84, delay: 0, options: [], animations: {
+        UIView.animate(withDuration: 0.84, delay: 0, options: [], animations: {
             self.tableViewHeaderScrollView.contentOffset.x = CGFloat(Int(DeviceSize.screenWidth()) * self.bannerPageCounter)
             }, completion: nil)
     }
-
+    
     //スクロールビューの初期設定
     private func initTableViewHeaderScrollView() {
-
-        tableViewHeaderScrollView.pagingEnabled = true
-        tableViewHeaderScrollView.scrollEnabled = false
-        tableViewHeaderScrollView.directionalLockEnabled = false
+        
+        tableViewHeaderScrollView.isPagingEnabled = true
+        tableViewHeaderScrollView.isScrollEnabled = false
+        tableViewHeaderScrollView.isDirectionalLockEnabled = false
         tableViewHeaderScrollView.showsHorizontalScrollIndicator = true
         tableViewHeaderScrollView.showsVerticalScrollIndicator = false
         tableViewHeaderScrollView.bounces = false
@@ -103,7 +99,7 @@ class TableHeaderViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
 }
 
 extension TableHeaderViewController: UIScrollViewDelegate {

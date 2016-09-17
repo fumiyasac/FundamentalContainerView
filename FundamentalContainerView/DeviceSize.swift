@@ -13,17 +13,17 @@ struct DeviceSize {
     
     //デバイスのCGRectを取得
     static func bounds() -> CGRect {
-        return UIScreen.mainScreen().bounds
+        return UIScreen.main.bounds
     }
     
     //デバイスの画面の横サイズを取得
     static func screenWidth() -> Int {
-        return Int(UIScreen.mainScreen().bounds.size.width)
+        return Int(UIScreen.main.bounds.size.width)
     }
     
     //デバイスの画面の縦サイズを取得
     static func screenHeight() -> Int {
-        return Int(UIScreen.mainScreen().bounds.size.height)
+        return Int(UIScreen.main.bounds.size.height)
     }
     
 }
