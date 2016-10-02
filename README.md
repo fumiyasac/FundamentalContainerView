@@ -14,6 +14,13 @@
 
 ※ 別ブランチに写真等を入れたものをプッシュする予定です。
 
+##### 詳細記事について
 詳細な解説＆実装のポイントになる部分はこちらに掲載しておりますので、是非とも実機などがおありの場合はインストールをして挙動や振る舞いをご確認いただければと思います。
 
-(Qiita) http://qiita.com/fumiyasac@github/items/17cbcffd90deee2cff43
++ (Qiita) http://qiita.com/fumiyasac@github/items/17cbcffd90deee2cff43
+
+##### Swift3.0及びXCode8について
+サンプルはSwift3.0対応をしています。
+※ブランチはこのリポジトリ内の「feature/swift3」になりますのでXCode8の方はこちらをお使い下さい。
+
++ (Qitta) http://qiita.com/fumiyasac@github/items/3218c35de5e59f3bfafa
